@@ -1,4 +1,4 @@
 import ILLogo from './logo.svg';
 import ILGetStarted from './bg.png';
-
-export {ILLogo, ILGetStarted};
+import ILNullPhoto from './null_photo.png';
+export {ILLogo, ILGetStarted, ILNullPhoto};

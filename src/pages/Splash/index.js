@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
+import {colors, fonts} from '../../utils';
 const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
   page: {flex: 1, alignItems: 'center', justifyContent: 'center'},
   title: {
     fontSize: 20,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#112340',
+    fontFamily: fonts.primary[600],
+    color: colors.secondary,
     marginTop: 20,
   },
 });
