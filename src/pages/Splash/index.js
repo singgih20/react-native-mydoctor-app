@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   page: {flex: 1, alignItems: 'center', justifyContent: 'center'},
   title: {
     fontSize: 20,
-    fontFamily: fonts.primary[600],
+    fontFamily: fonts.primary['600'],
     color: colors.secondary,
     marginTop: 20,
   },

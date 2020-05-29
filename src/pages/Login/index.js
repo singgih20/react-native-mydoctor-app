@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   page: {padding: 40, backgroundColor: 'white', flex: 1},
   text: {
     fontSize: 20,
-    fontFamily: fonts.primary[600],
+    fontFamily: fonts.primary['600'],
     color: '#112340',
     marginTop: 40,
     marginBottom: 40,

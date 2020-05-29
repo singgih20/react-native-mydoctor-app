@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     color: colors.text.primary,
-    fontFamily: fonts.primary[600],
+    fontFamily: fonts.primary['600'],
     textAlign: 'center',
   },
   profession: {
