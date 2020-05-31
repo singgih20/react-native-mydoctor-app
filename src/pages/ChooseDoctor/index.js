@@ -19,7 +19,13 @@ const ChooseDoctor = ({navigation}) => {
         desc="wanita"
         onPress={() => navigation.navigate('Chatting')}
       />
-      <List type="next" profile={DummyDoctor1} name="Bambang" desc="wanita" />
+      <List
+        type="next"
+        profile={DummyDoctor1}
+        name="Bambang"
+        desc="wanita"
+        onPress={() => navigation.navigate('Chatting')}
+      />
       <List type="next" profile={DummyDoctor1} name="Bambang" desc="wanita" />
       <List type="next" profile={DummyDoctor1} name="Bambang" desc="wanita" />
       <List type="next" profile={DummyDoctor1} name="Bambang" desc="wanita" />

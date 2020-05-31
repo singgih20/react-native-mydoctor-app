@@ -8,7 +8,12 @@ import {
   Gap,
 } from '../../components';
 import {fonts, colors} from '../../utils';
-import {JSONCategoryDoctor} from '../../assets';
+import {
+  JSONCategoryDoctor,
+  DummyDoctor1,
+  DummyDoctor2,
+  DummyDoctor3,
+} from '../../assets';
 
 const Doctor = ({navigation}) => {
   return (
@@ -41,7 +46,24 @@ const Doctor = ({navigation}) => {
             </ScrollView>
           </View>
           <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-          <RatedDoctor />
+          <RatedDoctor
+            name="Alexa Rachel"
+            avatar={DummyDoctor1}
+            desc="Peaditrian"
+            onPress={() => navigation.navigate('DoctorProfile')}
+          />
+          <RatedDoctor
+            name="Sunny Frank"
+            avatar={DummyDoctor2}
+            desc="Peaditrian"
+            onPress={() => navigation.navigate('DoctorProfile')}
+          />
+          <RatedDoctor
+            name="Angga Risky"
+            avatar={DummyDoctor3}
+            desc="Peaditrian"
+            onPress={() => navigation.navigate('DoctorProfile')}
+          />
           <Text style={styles.sectionLabel}>Good News</Text>
           <NewsItem />
           <NewsItem />

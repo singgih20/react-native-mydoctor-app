@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {List} from '../../components';
 import {colors, fonts} from '../../utils';
 import {DummyDoctor1, DummyDoctor2, DummyDoctor3} from '../../assets';
-const Messages = () => {
+const Messages = ({navigation}) => {
   const [doctors] = useState([
     {
       id: 1,
@@ -37,6 +37,7 @@ const Messages = () => {
               desc={doctor.desc}
               name={doctor.name}
               profile={doctor.profile}
+              onPress={() => navigation.navigate('Chatting')}
             />
           );
         })}
