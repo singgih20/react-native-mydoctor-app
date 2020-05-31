@@ -1,35 +1,37 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Header, Profile, List} from '../../components';
-const UserProfile = () => {
+import {Header, Profile, List, Gap} from '../../components';
+const UserProfile = ({navigation}) => {
   return (
-    <View>
+    <View style={styles.page}>
       <Header title="Profile" />
+      <Gap height={10} />
       <Profile />
-      <Text>User Profile Page</Text>
+      <Gap height={14} />
       <List
         name="Edit Profile"
         desc="Last Update Yesterday"
         type="next"
-        icon="icon"
+        icon="edit-profile"
+        onPress={() => navigation.navigate('UpdateProfile')}
+      />
+      <List
+        name="Edit Language"
+        desc="Last Update Yesterday"
+        type="next"
+        icon="language"
       />
       <List
         name="Edit Profile"
         desc="Last Update Yesterday"
         type="next"
-        icon="icon"
+        icon="rate"
       />
       <List
         name="Edit Profile"
         desc="Last Update Yesterday"
         type="next"
-        icon="icon"
-      />
-      <List
-        name="Edit Profile"
-        desc="Last Update Yesterday"
-        type="next"
-        icon="icon"
+        icon="help"
       />
     </View>
   );
@@ -37,4 +39,6 @@ const UserProfile = () => {
 
 export default UserProfile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  page: {backgroundColor: 'white', flex: 1},
+});

@@ -1,12 +1,32 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import {DummyDoctor1, IconNext} from '../../../assets';
+import {
+  DummyDoctor1,
+  IconNext,
+  IconEditProfile,
+  IconLanguage,
+  IconRate,
+  IconHelp,
+} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const List = ({name, profile, desc, type, onPress}) => {
+const List = ({name, profile, desc, type, onPress, icon}) => {
+  const Icon = () => {
+    if (icon === 'edit-profile') {
+      return <IconEditProfile />;
+    } else if (icon === 'language') {
+      return <IconLanguage />;
+    } else if (icon === 'rate') {
+      return <IconRate />;
+    } else if (icon === 'help') {
+      return <IconHelp />;
+    } else {
+      return <IconEditProfile />;
+    }
+  };
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image source={profile} style={styles.avatar} />
+      {icon ? <Icon /> : <Image source={profile} style={styles.avatar} />}
       <View style={styles.wrapper}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{desc}</Text>
@@ -27,8 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  avatar: {width: 46, height: 46, borderRadius: 46 / 2, marginRight: 12},
-  wrapper: {flex: 1},
+  avatar: {width: 46, height: 46, borderRadius: 46 / 2},
+  wrapper: {flex: 1, marginLeft: 16},
   name: {
     fontSize: 16,
     fontFamily: fonts.primary.normal,
