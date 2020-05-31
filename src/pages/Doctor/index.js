@@ -8,14 +8,15 @@ import {
   Gap,
 } from '../../components';
 import {fonts, colors} from '../../utils';
+import {JSONCategoryDoctor} from '../../assets';
 
-const Doctor = () => {
+const Doctor = ({navigation}) => {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Gap height={30} />
-          <HomeProfile />
+          <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
           <Gap height={30} />
           <Text style={styles.welcome}>
             Mau konsultasi dengan siapa hari ini?
@@ -25,10 +26,16 @@ const Doctor = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.category}>
                 <Gap width={16} />
-                <DoctorCategory profession="dokter umum" />
-                <DoctorCategory profession="psikiater" />
-                <DoctorCategory profession="dokter obat" />
-                <DoctorCategory profession="dokter obat" />
+                {JSONCategoryDoctor.data.map(item => {
+                  return (
+                    <DoctorCategory
+                      profession={item.profession}
+                      key={item.id}
+                      onPress={() => navigation.navigate('ChooseDoctor')}
+                    />
+                  );
+                })}
+
                 <Gap width={6} />
               </View>
             </ScrollView>

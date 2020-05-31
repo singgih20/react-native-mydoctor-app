@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginTop: 91,
     color: colors.white,
-    fontFamily: fonts.primary['600'],
+    fontFamily: fonts.primary[600],
   },
 });

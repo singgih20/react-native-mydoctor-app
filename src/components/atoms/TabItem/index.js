@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   text: active => ({
     fontSize: 12,
     color: active ? colors.text.menuActive : colors.text.menuInactive,
-    fontWeight: fonts.primary['600'],
+    fontFamily: fonts.primary[600],
     marginTop: 4,
   }),
 });

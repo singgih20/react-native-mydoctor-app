@@ -1,51 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ILCatObat, ILCatUmum, ILCatPsikiater} from '../../../assets';
 import {fonts, colors} from '../../../utils';
 
-const DoctorCategory = ({profession}) => {
-  const Category = () => {
-    if (profession === 'dokter umum')
-      return (
-        <View>
-          <ILCatUmum />
-          <View style={styles.write}>
-            <Text style={styles.sayaButuh}>
-              Saya butuh <Text style={styles.profession}>{profession}</Text>{' '}
-            </Text>
-          </View>
-        </View>
-      );
+const DoctorCategory = ({profession, onPress}) => {
+  const Icon = () => {
+    if (profession === 'dokter umum') return <ILCatUmum />;
 
-    if (profession === 'psikiater')
-      return (
-        <View>
-          <ILCatPsikiater />
-          <View style={styles.write}>
-            <Text style={styles.sayaButuh}>
-              Saya butuh <Text style={styles.profession}>{profession}</Text>{' '}
-            </Text>
-          </View>
-        </View>
-      );
+    if (profession === 'psikiater') return <ILCatPsikiater />;
 
-    if (profession === 'dokter obat')
-      return (
-        <View>
-          <ILCatObat />
-          <View style={styles.write}>
-            <Text style={styles.sayaButuh}>
-              Saya butuh <Text style={styles.profession}>{profession}</Text>{' '}
-            </Text>
-          </View>
-        </View>
-      );
+    if (profession === 'dokter obat') return <ILCatObat />;
   };
 
   return (
-    <View style={styles.container}>
-      <Category />
-    </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Icon />
+      <View style={styles.write}>
+        <Text style={styles.sayaButuh}>
+          Saya butuh <Text style={styles.profession}>{profession}</Text>{' '}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
