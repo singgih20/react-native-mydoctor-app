@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import {Button, Gap, Header, Input, Loading} from '../../components';
-import {colors, useForm} from '../../utils';
 import {Fire} from '../../config';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {colors, useForm, storeData, getData} from '../../utils';
 const Register = ({navigation}) => {
   const [form, setForm] = useForm({
     fullName: '',
@@ -15,17 +15,27 @@ const Register = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const onContinue = () => {
+    // getData('user').then(res => console.log(res));
     setLoading(true);
-    setForm('reset');
     Fire.auth()
       .createUserWithEmailAndPassword(form.email, form.password)
       .then(success => {
+        console.log(success);
         setLoading(false);
+        setForm('reset');
+        const data = {
+          fullName: form.fullName,
+          profession: form.profession,
+          email: form.email,
+        };
+        storeData('user', data);
+        Fire.database()
+          .ref('users/' + success.user.uid + '/')
+          .set(data);
         console.log('Register success', success);
       })
       .catch(error => {
-        // Handle Errors here.
-        const errorCode = error.code;
+        // Handle Errors here
         setLoading(false);
         const errorMessage = error.message;
         showMessage({
@@ -36,7 +46,7 @@ const Register = ({navigation}) => {
         });
         console.log(error);
       });
-    // navigation.navigate('UploadPhoto');
+    navigation.navigate('UploadPhoto');
   };
   return (
     <View style={styles.page}>
