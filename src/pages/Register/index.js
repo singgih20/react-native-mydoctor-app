@@ -27,12 +27,13 @@ const Register = ({navigation}) => {
           fullName: form.fullName,
           profession: form.profession,
           email: form.email,
+          uid: success.user.uid,
         };
         storeData('user', data);
         Fire.database()
           .ref('users/' + success.user.uid + '/')
           .set(data);
-        console.log('Register success', success);
+        navigation.navigate('UploadPhoto', data);
       })
       .catch(error => {
         // Handle Errors here
@@ -46,7 +47,6 @@ const Register = ({navigation}) => {
         });
         console.log(error);
       });
-    navigation.navigate('UploadPhoto');
   };
   return (
     <View style={styles.page}>

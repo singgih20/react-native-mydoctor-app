@@ -3,29 +3,56 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {Header, Button, Link, Gap} from '../../components';
 import {ILNullPhoto} from '../../assets/illustration';
 import {IconPlus, IconRemove} from '../../assets';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, storeData} from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import {showMessage} from 'react-native-flash-message';
-const UploadPhoto = ({navigation}) => {
+import {Fire} from '../../config';
+
+const UploadPhoto = ({navigation, route}) => {
   const [hasPhoto, setHasPhoto] = useState(true);
   const [photo, setPhoto] = useState(ILNullPhoto);
+  const [photoForDb, setPhotoForDb] = useState('');
   const getImage = () => {
     // Open Image Library:
-    ImagePicker.launchImageLibrary({}, response => {
-      console.log(response);
-      if (response.didCancel || response.error) {
-        showMessage({
-          message: 'ops, sepertinya anda tidak memilih fotonya?',
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
-      } else {
-        const source = {uri: response.uri};
-        setPhoto(source);
-        setHasPhoto(false);
-      }
-    });
+    ImagePicker.launchImageLibrary(
+      {quality: 0.3, maxHeight: 200, maxWidth: 200},
+      response => {
+        console.log(response);
+        if (response.didCancel || response.error) {
+          showMessage({
+            message: 'ops, sepertinya anda tidak memilih fotonya?',
+            type: 'default',
+            backgroundColor: colors.error,
+            color: colors.white,
+          });
+        } else {
+          const source = {uri: response.uri};
+          setPhotoForDb(`data:${response.type};base64, ${response.data}`);
+          setPhoto(source);
+          setHasPhoto(false);
+        }
+      },
+    );
+  };
+
+  const uploadAndContinue = () => {
+    Fire.database()
+      .ref('users/' + route.params.uid + '/')
+      .update({photo: photoForDb});
+
+    // ambil data dari params halaman register
+    const data = route.params;
+    // tambah data
+    data.photo = photoForDb;
+    storeData('user', data);
+
+    navigation.replace('MainApp');
+  };
+
+  const skipAndContinue = () => {
+    const data = route.params;
+    storeData('user', data);
+    navigation.replace('MainApp');
   };
 
   return (
@@ -38,22 +65,22 @@ const UploadPhoto = ({navigation}) => {
             {!hasPhoto && <IconRemove style={styles.addPhoto} />}
             {hasPhoto && <IconPlus style={styles.addPhoto} />}
           </TouchableOpacity>
-          <Text style={styles.name}>Shayna Bambang</Text>
-          <Text style={styles.profession}>Product Designer</Text>
+          <Text style={styles.name}>{route.params.fullName}</Text>
+          <Text style={styles.profession}>{route.params.profession}</Text>
         </View>
 
         <View>
           <Button
             disable={hasPhoto}
             title="Upload and Continue"
-            onPress={() => navigation.replace('MainApp')}
+            onPress={uploadAndContinue}
           />
           <Gap height={30} />
           <Link
             title="Skip for this"
             align="center"
             size={16}
-            onPress={() => navigation.replace('MainApp')}
+            onPress={skipAndContinue}
           />
         </View>
       </View>
@@ -88,6 +115,7 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     fontFamily: fonts.primary[600],
     textAlign: 'center',
+    textTransform: 'capitalize',
   },
   profession: {
     fontSize: 18,
@@ -95,6 +123,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.text.secondary,
     marginTop: 4,
+    textTransform: 'capitalize',
   },
   footer: {},
 });
