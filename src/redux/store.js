@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
 
 const initialState = {
-  loading: true,
+  loading: false,
   name: 'Singgih',
   address: 'Bandung',
 };

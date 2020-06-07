@@ -10,6 +10,8 @@ const DoctorCategory = ({profession, onPress}) => {
     if (profession === 'psikiater') return <ILCatPsikiater />;
 
     if (profession === 'dokter obat') return <ILCatObat />;
+
+    return <ILCatUmum />;
   };
 
   return (

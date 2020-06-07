@@ -13,15 +13,17 @@ const MainApp = () => {
         <Router />
       </NavigationContainer>
       <FlashMessage position="top" />
-      {loading && <Loading />}
+      {stateGlobal.loading && <Loading />}
     </>
   );
 };
 
 const App = () => {
-  <Provider store={store}>
-    <MainApp />
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
+  );
 };
 
 export default App;

@@ -3,16 +3,14 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {DummyNews1} from '../../../assets/dummy';
 import {fonts, colors} from '../../../utils';
 
-const NewsItem = () => {
+const NewsItem = ({title, date, image}) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
-        <Text style={styles.title}>
-          Is it safe to stay at home during coronavirus?
-        </Text>
-        <Text style={styles.today}>Today</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.today}>{date}</Text>
       </View>
-      <Image style={styles.image} source={DummyNews1} />
+      <Image style={styles.image} source={{uri: image}} />
     </View>
   );
 };
