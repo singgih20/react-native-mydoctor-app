@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     fontFamily: 'Nunito-SemiBold',
+    textTransform: 'capitalize',
     color: type === 'dark' ? colors.white : colors.text.primary,
   }),
 });
